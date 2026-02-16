@@ -42,7 +42,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center">
                 <MapPin className="w-4 h-4 mr-3 text-indigo-500" />
-                Hitech City, Hyderabad, India
+                Pune
               </li>
             </ul>
           </div>
@@ -56,7 +56,7 @@ export default function Footer() {
               <a href="#" className="bg-slate-800 p-2 rounded-lg hover:bg-indigo-600 transition-colors">
                 <Instagram className="w-5 h-5 text-white" />
               </a>
-              <a href="#" className="bg-slate-800 p-2 rounded-lg hover:bg-indigo-600 transition-colors">
+              <a href="https://www.linkedin.com/in/vivekraut18" className="bg-slate-800 p-2 rounded-lg hover:bg-indigo-600 transition-colors" target="_blank" rel="noopener noreferrer">
                 <Linkedin className="w-5 h-5 text-white" />
               </a>
             </div>
@@ -79,5 +79,5 @@ export default function Footer() {
 }
 
 const MapPin = ({ className }: { className: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></svg>
 );
