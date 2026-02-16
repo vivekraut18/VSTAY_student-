@@ -1,0 +1,7 @@
+{
+  "name": "Room Finder Pro",
+  "description": "A production-ready real estate platform with AI-powered search suggestions, advanced filtering, and a comprehensive user dashboard.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
