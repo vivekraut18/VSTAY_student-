@@ -36,12 +36,24 @@ const INITIAL_PROPERTIES: Property[] = [
 ];
 
 class Database {
-  private properties: Property[] = JSON.parse(localStorage.getItem('properties') || JSON.stringify(INITIAL_PROPERTIES));
-  private users: User[] = JSON.parse(localStorage.getItem('users') || '[]');
-  private messages: Message[] = JSON.parse(localStorage.getItem('messages') || '[]');
-  private wishlist: string[] = JSON.parse(localStorage.getItem('wishlist') || '[]');
+  private properties: Property[];
+  private users: User[];
+  private messages: Message[];
+  private wishlist: string[];
 
   constructor() {
+    try {
+      this.properties = JSON.parse(localStorage.getItem('properties') || JSON.stringify(INITIAL_PROPERTIES));
+      this.users = JSON.parse(localStorage.getItem('users') || '[]');
+      this.messages = JSON.parse(localStorage.getItem('messages') || '[]');
+      this.wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+    } catch (e) {
+      console.error("Failed to load data from localStorage, falling back to defaults:", e);
+      this.properties = INITIAL_PROPERTIES;
+      this.users = [];
+      this.messages = [];
+      this.wishlist = [];
+    }
     this.save();
   }
 
@@ -53,7 +65,7 @@ class Database {
   }
 
   getProperties() { return this.properties; }
-  
+
   addProperty(p: Property) {
     this.properties.unshift(p);
     this.save();
@@ -79,7 +91,7 @@ class Database {
   }
 
   getWishlist() { return this.wishlist; }
-  
+
   toggleWishlist(propertyId: string) {
     if (this.wishlist.includes(propertyId)) {
       this.wishlist = this.wishlist.filter(id => id !== propertyId);
