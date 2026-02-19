@@ -15,7 +15,7 @@ export default function Footer() {
               <span className="text-xl font-bold text-white tracking-tight">RoomFinderPro</span>
             </div>
             <p className="text-sm leading-relaxed text-slate-400">
-              Elevating the property search experience with AI-powered matching and verified listings. Your dream home is just a click away.
+              Elevating the search experience with AI-powered matching for verified Rooms, PGs and Rented Flats. Your perfect space is just a click away.
             </p>
           </div>
 
@@ -24,7 +24,7 @@ export default function Footer() {
             <ul className="space-y-4 text-sm">
               <li><a href="#" className="hover:text-white transition-colors">Home Search</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Market Trends</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Property Guides</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Room & Flat Guides</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Contact Support</a></li>
             </ul>
           </div>

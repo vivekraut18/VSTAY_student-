@@ -14,8 +14,8 @@ export interface User {
 }
 
 export enum PropertyType {
-  RENT = 'RENT',
-  BUY = 'BUY'
+  ROOM_PG = 'ROOM_PG',
+  FLAT = 'FLAT'
 }
 
 export interface Property {

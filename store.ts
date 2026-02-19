@@ -5,33 +5,33 @@ import { Property, User, Message, PropertyType, UserRole } from './types';
 const INITIAL_PROPERTIES: Property[] = [
   {
     id: 'p1',
-    title: 'Luxury Apartment in Downtown',
-    description: 'Beautiful modern apartment with skyline views.',
-    type: PropertyType.RENT,
-    price: 45000,
-    location: 'Mumbai, Maharashtra',
-    bedrooms: 3,
-    bathrooms: 2,
-    area: 1200,
-    images: ['https://picsum.photos/seed/p1/800/600', 'https://picsum.photos/seed/p1_2/800/600'],
+    title: 'Shared PG Room (3-Bed) in Viman Nagar',
+    description: 'Triple sharing furnished room with comfortable beds, individual lockers, and high-speed Wi-Fi. Ideal for students.',
+    type: PropertyType.ROOM_PG,
+    price: 8500,
+    location: 'Viman Nagar, Pune',
+    bedrooms: 1,
+    bathrooms: 1,
+    area: 300,
+    images: ['/listings/room1.jpg'],
     ownerId: 'u1',
     createdAt: new Date().toISOString(),
-    amenities: ['Gym', 'Pool', 'Parking']
+    amenities: ['Wi-Fi', 'Locker', 'Power Backup', 'Cleaning']
   },
   {
     id: 'p2',
-    title: 'Cozy Villa near Beach',
-    description: 'Perfect for families seeking tranquility.',
-    type: PropertyType.BUY,
-    price: 15000000, // 1.5 Crore
-    location: 'Goa, India',
-    bedrooms: 4,
-    bathrooms: 3,
-    area: 2500,
-    images: ['https://picsum.photos/seed/p2/800/600', 'https://picsum.photos/seed/p2_2/800/600'],
+    title: 'Twin Sharing PG with AC - Blue Wing',
+    description: 'Stylish blue-themed twin sharing room near Symbiosis. Includes study tables and spacious wardrobes.',
+    type: PropertyType.ROOM_PG,
+    price: 15000,
+    location: 'Viman Nagar, Pune',
+    bedrooms: 1,
+    bathrooms: 1,
+    area: 280,
+    images: ['/listings/room2.jpg'],
     ownerId: 'u2',
     createdAt: new Date(Date.now() - 86400000).toISOString(),
-    amenities: ['Garden', 'Beach Access']
+    amenities: ['AC', 'Wi-Fi', 'Modular Kitchen', 'Security']
   }
 ];
 
@@ -43,7 +43,13 @@ class Database {
 
   constructor() {
     try {
-      this.properties = JSON.parse(localStorage.getItem('properties') || JSON.stringify(INITIAL_PROPERTIES));
+      const stored = localStorage.getItem('properties');
+      if (stored && stored.includes('picsum.photos')) {
+        // Force refresh if using old placeholders
+        this.properties = INITIAL_PROPERTIES;
+      } else {
+        this.properties = JSON.parse(stored || JSON.stringify(INITIAL_PROPERTIES));
+      }
       this.users = JSON.parse(localStorage.getItem('users') || '[]');
       this.messages = JSON.parse(localStorage.getItem('messages') || '[]');
       this.wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');

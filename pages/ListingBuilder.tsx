@@ -198,7 +198,7 @@ export default function ListingBuilder() {
     // Form state
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [propertyType, setPropertyType] = useState<PropertyType>(PropertyType.RENT);
+    const [propertyType, setPropertyType] = useState<PropertyType>(PropertyType.ROOM_PG);
     const [price, setPrice] = useState('');
     const [bedrooms, setBedrooms] = useState(2);
     const [bathrooms, setBathrooms] = useState(1);
@@ -371,7 +371,7 @@ export default function ListingBuilder() {
                                 {editPropertyId ? 'Edit Listing' : 'Create New Listing'}
                             </h1>
                             <p className="text-slate-400 text-sm font-medium mt-0.5">
-                                {editPropertyId ? 'Update your property details' : 'Fill in the details to publish your property'}
+                                {editPropertyId ? 'Update your listing details' : 'Fill in the details to publish your room or flat'}
                             </p>
                         </div>
                     </div>
@@ -424,11 +424,11 @@ export default function ListingBuilder() {
                                 <div className="space-y-6">
                                     <div className="flex items-center gap-3 mb-2">
                                         <div className="p-2.5 bg-indigo-100 rounded-2xl"><Home className="w-5 h-5 text-indigo-600" /></div>
-                                        <h2 className="text-xl font-black text-slate-900">Basic Information</h2>
+                                        <h2 className="text-xl font-black text-slate-900">General Information</h2>
                                     </div>
 
                                     <div>
-                                        <label className={labelCls}>Property Title</label>
+                                        <label className={labelCls}>Listing Title</label>
                                         <input type="text" value={title} onChange={e => { setTitle(e.target.value); setErrors(p => ({ ...p, title: undefined })); }}
                                             placeholder="e.g. Luxury Apartment in Downtown" className={inputCls(errors.title)} />
                                         {errors.title && <p className="text-red-500 text-xs font-bold mt-1.5 ml-1">{errors.title}</p>}
@@ -437,7 +437,7 @@ export default function ListingBuilder() {
                                     <div>
                                         <label className={labelCls}>Description</label>
                                         <textarea value={description} onChange={e => { setDescription(e.target.value); setErrors(p => ({ ...p, description: undefined })); }}
-                                            placeholder="Describe your property in detail..." rows={4} className={inputCls(errors.description) + ' resize-none'} />
+                                            placeholder="Describe the room or flat in detail..." rows={4} className={inputCls(errors.description) + ' resize-none'} />
                                         <div className="flex justify-between mt-1.5 ml-1">
                                             {errors.description && <p className="text-red-500 text-xs font-bold">{errors.description}</p>}
                                             <p className="text-slate-300 text-xs font-bold ml-auto">{description.length} chars</p>
@@ -448,12 +448,12 @@ export default function ListingBuilder() {
                                         <div>
                                             <label className={labelCls}>Listing Type</label>
                                             <div className="flex gap-3">
-                                                {[PropertyType.RENT, PropertyType.BUY].map(t => (
+                                                {[PropertyType.ROOM_PG, PropertyType.FLAT].map(t => (
                                                     <button key={t} onClick={() => setPropertyType(t)} type="button"
                                                         className={`flex-1 py-3 rounded-2xl text-sm font-black transition-all border-2
                             ${propertyType === t ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg shadow-indigo-100' : 'bg-white border-slate-200 text-slate-500 hover:border-indigo-300'}`}
                                                     >
-                                                        {t === PropertyType.RENT ? '🏠 For Rent' : '🏡 For Sale'}
+                                                        {t === PropertyType.ROOM_PG ? '🏠 Room / PG' : '🏢 Rented Flat'}
                                                     </button>
                                                 ))}
                                             </div>
@@ -461,12 +461,12 @@ export default function ListingBuilder() {
                                         <div>
                                             <label className={labelCls}>
                                                 <IndianRupee className="w-3 h-3 inline mr-1" />
-                                                Price {propertyType === PropertyType.RENT ? '(per month)' : '(total)'}
+                                                Price (per month)
                                             </label>
                                             <div className={`flex items-center gap-0 border-2 rounded-2xl overflow-hidden transition-all ${errors.price ? 'border-red-300' : 'border-slate-200 focus-within:border-indigo-500 focus-within:ring-4 focus-within:ring-indigo-50'}`}>
                                                 <button type="button"
                                                     onClick={() => {
-                                                        const step = propertyType === PropertyType.RENT ? 500 : 100000;
+                                                        const step = 500;
                                                         const cur = Number(price) || 0;
                                                         const next = Math.max(0, cur - step);
                                                         setPrice(String(next));
@@ -487,13 +487,13 @@ export default function ListingBuilder() {
                                                             setPrice(raw);
                                                             setErrors(p => ({ ...p, price: undefined }));
                                                         }}
-                                                        placeholder={propertyType === PropertyType.RENT ? '5,000' : '50,00,000'}
+                                                        placeholder={'5,000'}
                                                         className="w-full py-3 bg-transparent outline-none text-sm font-bold text-slate-900 placeholder:text-slate-300"
                                                     />
                                                 </div>
                                                 <button type="button"
                                                     onClick={() => {
-                                                        const step = propertyType === PropertyType.RENT ? 500 : 100000;
+                                                        const step = 500;
                                                         const cur = Number(price) || 0;
                                                         setPrice(String(cur + step));
                                                         setErrors(p => ({ ...p, price: undefined }));
@@ -504,7 +504,7 @@ export default function ListingBuilder() {
                                                 </button>
                                             </div>
                                             <p className="text-slate-300 text-[10px] font-bold mt-1.5 ml-1">
-                                                Use +/− buttons ({propertyType === PropertyType.RENT ? '₹500 steps' : '₹1,00,000 steps'}) or type directly
+                                                Use +/− buttons (₹500 steps) or type directly
                                             </p>
                                             {errors.price && <p className="text-red-500 text-xs font-bold mt-1 ml-1">{errors.price}</p>}
                                         </div>
@@ -517,7 +517,7 @@ export default function ListingBuilder() {
                                 <div className="space-y-6">
                                     <div className="flex items-center gap-3 mb-2">
                                         <div className="p-2.5 bg-violet-100 rounded-2xl"><Ruler className="w-5 h-5 text-violet-600" /></div>
-                                        <h2 className="text-xl font-black text-slate-900">Property Details</h2>
+                                        <h2 className="text-xl font-black text-slate-900">Listing Details</h2>
                                     </div>
 
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -528,7 +528,7 @@ export default function ListingBuilder() {
 
                                     <div>
                                         <label className={labelCls}>
-                                            <MapPin className="w-3 h-3 inline mr-1" /> Property Location
+                                            <MapPin className="w-3 h-3 inline mr-1" /> Listing Location
                                         </label>
                                         <MapPicker
                                             location={location}
@@ -553,7 +553,7 @@ export default function ListingBuilder() {
                                     <div>
                                         <div className="flex items-center gap-3 mb-4">
                                             <div className="p-2.5 bg-amber-100 rounded-2xl"><Camera className="w-5 h-5 text-amber-600" /></div>
-                                            <h2 className="text-xl font-black text-slate-900">Property Images</h2>
+                                            <h2 className="text-xl font-black text-slate-900">Listing Images</h2>
                                         </div>
 
                                         {/* Hidden file input */}
@@ -660,7 +660,7 @@ export default function ListingBuilder() {
 
                                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                                         {[
-                                            { label: 'Type', value: propertyType === PropertyType.RENT ? 'For Rent' : 'For Sale' },
+                                            { label: 'Type', value: propertyType === PropertyType.ROOM_PG ? 'Room / PG' : 'Rented Flat' },
                                             { label: 'Price', value: `₹${Number(price).toLocaleString()}` },
                                             { label: 'Bedrooms', value: String(bedrooms) },
                                             { label: 'Area', value: `${area} sqft` },
@@ -734,8 +734,8 @@ export default function ListingBuilder() {
                                     <img src={preview.images?.[0] || 'https://picsum.photos/seed/placeholder/800/600'} className="w-full h-full object-cover" alt="Preview" />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                                     <div className="absolute bottom-4 left-4 right-4">
-                                        <span className={`inline-block px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider mb-2 ${preview.type === PropertyType.RENT ? 'bg-sky-500 text-white' : 'bg-amber-500 text-white'}`}>
-                                            {preview.type === PropertyType.RENT ? 'For Rent' : 'For Sale'}
+                                        <span className={`inline-block px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider mb-2 ${preview.type === PropertyType.ROOM_PG ? 'bg-sky-500 text-white' : 'bg-indigo-500 text-white'}`}>
+                                            {preview.type === PropertyType.ROOM_PG ? 'Room / PG' : 'Rented Flat'}
                                         </span>
                                         <h3 className="text-white font-black text-lg leading-tight line-clamp-2">{preview.title}</h3>
                                     </div>
@@ -749,7 +749,7 @@ export default function ListingBuilder() {
                                 <div className="p-5 space-y-4">
                                     <p className="text-2xl font-black text-indigo-600">
                                         ₹{(preview.price || 0).toLocaleString()}
-                                        {preview.type === PropertyType.RENT && <span className="text-xs text-slate-400 font-bold">/mo</span>}
+                                        <span className="text-xs text-slate-400 font-bold">/mo</span>
                                     </p>
                                     <div className="flex items-center gap-1 text-slate-500 text-sm">
                                         <MapPin className="w-3.5 h-3.5" /><span className="font-medium">{preview.location}</span>

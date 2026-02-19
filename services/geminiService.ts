@@ -35,7 +35,7 @@ export const getPropertyDescription = async (propertyData: any): Promise<string>
   try {
     const response = await ai.models.generateContent({
       model: "gemini-1.5-flash",
-      contents: `Write a compelling property description for a ${propertyData.bedrooms} BHK ${propertyData.type === 'RENT' ? 'rental' : 'sale'} property in ${propertyData.location} with ${propertyData.bathrooms} bathrooms. Highlight the area of ${propertyData.area} sqft.`,
+      contents: `Write a compelling description for a ${propertyData.bedrooms} BHK ${propertyData.type === 'FLAT' ? 'rented flat' : 'Room / PG'} in ${propertyData.location} with ${propertyData.bathrooms} bathrooms. Highlight the area of ${propertyData.area} sqft. This is for student accommodation.`,
     });
     return response.text || "No description generated.";
   } catch (error) {

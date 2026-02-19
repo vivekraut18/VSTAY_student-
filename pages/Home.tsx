@@ -45,7 +45,7 @@ export default function Home() {
             Find Your <span className="text-indigo-400">Perfect Space</span> Without The Stress
           </h1>
           <p className="text-xl md:text-2xl text-slate-200 font-light max-w-2xl mx-auto">
-            Discover thousands of verified rooms, apartments, and villas tailored to your lifestyle.
+            Discover verified rooms, PGs, and rented flats tailored to your student life.
           </p>
 
           <div className="relative max-w-2xl mx-auto group">
@@ -120,7 +120,7 @@ export default function Home() {
       <section className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 bg-white p-12 rounded-3xl shadow-xl border border-slate-100 -mt-20 relative z-10">
           {[
-            { label: 'Properties', value: '12K+', icon: Building },
+            { label: 'Rooms & PG', value: '12K+', icon: Building },
             { label: 'Happy Users', value: '25K+', icon: TrendingUp },
             { label: 'Cities', value: '50+', icon: MapPin },
             { label: 'Service Score', value: '4.9/5', icon: Zap }
@@ -165,7 +165,7 @@ export default function Home() {
         <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/3 w-96 h-96 bg-indigo-400 rounded-full blur-3xl opacity-30" />
 
         <div className="max-w-4xl mx-auto text-center space-y-10 relative z-10">
-          <h2 className="text-4xl md:text-6xl font-black text-white leading-tight">Ready to List Your Property?</h2>
+          <h2 className="text-4xl md:text-6xl font-black text-white leading-tight">Ready to List Your Space?</h2>
           <p className="text-xl text-indigo-100 font-light max-w-2xl mx-auto">
             Join thousands of successful sellers and landlords. List for free and find quality leads in hours.
           </p>

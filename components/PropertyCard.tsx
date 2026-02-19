@@ -32,14 +32,7 @@ export default function PropertyCard({ property, loading }: PropertyCardProps) {
   if (!property) return null;
 
   const formatPrice = (price: number, type: PropertyType) => {
-    if (type === PropertyType.RENT) {
-      return `₹${price.toLocaleString()}/mo`;
-    }
-    // Buy Logic: Convert to Lakhs or Crores
-    if (price >= 10000000) {
-      return `₹${(price / 10000000).toFixed(2)} Cr`;
-    }
-    return `₹${(price / 100000).toFixed(2)} L`;
+    return `₹${price.toLocaleString()}/mo`;
   };
 
   const isLiked = wishlist.includes(property.id);
@@ -58,9 +51,9 @@ export default function PropertyCard({ property, loading }: PropertyCardProps) {
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
         <div className="absolute top-4 left-4">
-          <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${property.type === PropertyType.RENT ? 'bg-emerald-100 text-emerald-700' : 'bg-indigo-100 text-indigo-700'
+          <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${property.type === PropertyType.ROOM_PG ? 'bg-emerald-100 text-emerald-700' : 'bg-indigo-100 text-indigo-700'
             }`}>
-            {property.type}
+            {property.type === PropertyType.ROOM_PG ? 'Room / PG' : 'Rented Flat'}
           </span>
         </div>
         <button

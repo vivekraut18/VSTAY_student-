@@ -86,7 +86,7 @@ export default function Dashboard() {
                   className="bg-indigo-600 text-white px-6 py-3 rounded-2xl font-black flex items-center shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition-all active:scale-95"
                   onClick={() => { setEditPropertyId(null); setCurrentPage('listing-builder'); }}
                 >
-                  <Plus className="w-5 h-5 mr-2" /> Add Property
+                  <Plus className="w-5 h-5 mr-2" /> Add Listing
                 </button>
               </div>
 
@@ -99,7 +99,7 @@ export default function Dashboard() {
                     <div className="flex-grow flex flex-col justify-between py-1">
                       <div>
                         <h4 className="font-bold text-slate-900 line-clamp-1">{p.title}</h4>
-                        <p className="text-xs text-slate-500 font-bold uppercase tracking-wider mt-1">{p.type} • ₹{p.price.toLocaleString()}</p>
+                        <p className="text-xs text-slate-500 font-bold uppercase tracking-wider mt-1">{p.type === PropertyType.ROOM_PG ? 'Room / PG' : 'Flat'} • ₹{p.price.toLocaleString()}/mo</p>
                       </div>
                       <div className="flex space-x-2">
                         <button onClick={() => { setEditPropertyId(p.id); setCurrentPage('listing-builder'); }} className="p-2 bg-slate-50 rounded-xl text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 transition-all"><Edit3 className="w-4 h-4" /></button>
@@ -116,8 +116,8 @@ export default function Dashboard() {
                 {myProperties.length === 0 && (
                   <div className="col-span-full py-20 bg-slate-100 rounded-3xl border-2 border-dashed border-slate-200 text-center">
                     <List className="w-12 h-12 text-slate-300 mx-auto mb-4" />
-                    <h3 className="text-xl font-bold text-slate-900">No properties yet</h3>
-                    <p className="text-slate-500 mt-1">Start by adding your first property to the platform.</p>
+                    <h3 className="text-xl font-bold text-slate-900">No rooms or flats yet</h3>
+                    <p className="text-slate-500 mt-1">Start by adding your first listing to the platform.</p>
                   </div>
                 )}
               </div>
